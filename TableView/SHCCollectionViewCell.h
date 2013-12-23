@@ -1,0 +1,15 @@
+//
+//  SHCCollectionViewCell.h
+//  TableView
+//
+//  Created by Cameron Palmer on 23.12.13.
+//  Copyright (c) 2013 Shortcut AS. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface SHCCollectionViewCell : UICollectionViewCell
+
+@property (weak, nonatomic) IBOutlet UILabel *textLabel;
+
+@end
