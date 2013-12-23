@@ -18,10 +18,6 @@ static NSString *kCollectionViewTableCellReuseIdentifier = @"CollectionViewTable
 @interface SHCCollectionViewController ()
 @property (strong, nonatomic) NSArray *tableViewData;
 
-@property (strong, nonatomic) NSArray *topSection;
-@property (strong, nonatomic) SHCTableViewDataStorage *selectedStorage;
-@property (strong, nonatomic) NSArray *bottomsSection;
-
 @end
 
 
