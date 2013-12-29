@@ -95,6 +95,8 @@ static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier"
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
+    
+    DDLogVerbose(@"from:%d, to:%d", sourceIndexPath.row, destinationIndexPath.row);
 }
 
 

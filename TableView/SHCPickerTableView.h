@@ -10,7 +10,7 @@
 
 
 
-@interface SHCPickerTableView : UITableView <UIScrollViewDelegate>
+@interface SHCPickerTableView : UITableView
 
 @property (copy, nonatomic) NSIndexPath *selectedIndexPath;
 

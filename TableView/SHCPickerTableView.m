@@ -75,6 +75,8 @@
     }
     
     UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
+    UIColor *originalColor = cell.backgroundColor;
+    cell.backgroundColor = [UIColor yellowColor];
     if (cell != nil) {
         UIGraphicsBeginImageContextWithOptions(cell.bounds.size, NO, 0);
         [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -91,7 +93,7 @@
         selectedImageView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
         selectedImageView.layer.shadowRadius = 6.0f;
         selectedImageView.layer.shadowOpacity = 0.8f;
-        selectedImageView.layer.opacity = 0.5f;
+        selectedImageView.layer.opacity = 1.0f;
         
         [UIView animateWithDuration:0.25f animations:^{
             selectedImageView.transform = CGAffineTransformMakeScale(1.1f, 1.1f);
@@ -100,34 +102,41 @@
         
         self.selectedImageView = selectedImageView;
     }
+    cell.backgroundColor = originalColor;
     
 }
 
 - (void)didScrollTableView:(CGFloat)points
 {
-    static CGFloat currentLeftoverPoints = 0.0f;
-    currentLeftoverPoints += points;
-    
-    UITableViewCell *cell = [self cellForRowAtIndexPath:self.selectedIndexPath];
-    CGFloat cellHeight = CGRectGetHeight(cell.frame);
+    int direction = points > 0.0f ? 1 : -1;
 
-    int numberOfCellsCrossed = floorf(fabsf(currentLeftoverPoints) / cellHeight);
+    static CGFloat currentLeftoverPoints = 0.0f;
+    currentLeftoverPoints += fabsf(points);
+
+    NSIndexPath *currentIndexPath = self.selectedIndexPath;
+    UITableViewCell *currentCell = [self cellForRowAtIndexPath:currentIndexPath];
+    
+    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:currentIndexPath.row + direction inSection:currentIndexPath.section];
+    UITableViewCell *nextCell = [self cellForRowAtIndexPath:newIndexPath];
+    CGFloat nextCellHeight = CGRectGetHeight(nextCell.frame);
     
     [self beginUpdates];
-    for (int i = 0; i < numberOfCellsCrossed; i++) {
-        CGFloat distance = cellHeight * numberOfCellsCrossed;
-        CGFloat direction = currentLeftoverPoints < 0.0f ? -1.0f : 1.0f;
-        
-        NSIndexPath *currentIndexPath = self.selectedIndexPath;
-        NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:currentIndexPath.row + (numberOfCellsCrossed * direction) inSection:currentIndexPath.section];
+    while (currentLeftoverPoints > nextCellHeight) {
         DDLogVerbose(@"MoveRowAtIndexPathRow:%d toIndexPathRow:%d", currentIndexPath.row, newIndexPath.row);
         if ([self.dataSource respondsToSelector:@selector(tableView:moveRowAtIndexPath:toIndexPath:)]) {
             [self.dataSource tableView:self moveRowAtIndexPath:currentIndexPath toIndexPath:newIndexPath];
         }
-        currentLeftoverPoints -= direction * distance;
+        currentLeftoverPoints -= nextCellHeight;
         
         [self highlightCellAtIndexPath:newIndexPath];
         _selectedIndexPath = newIndexPath;
+        
+        currentIndexPath = self.selectedIndexPath;
+        currentCell = [self cellForRowAtIndexPath:currentIndexPath];
+        
+        newIndexPath = [NSIndexPath indexPathForRow:currentIndexPath.row + direction inSection:currentIndexPath.section];
+        nextCell = [self cellForRowAtIndexPath:newIndexPath];
+        nextCellHeight = CGRectGetHeight(nextCell.frame);
     }
     [self endUpdates];
 }
