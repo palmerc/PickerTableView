@@ -11,6 +11,7 @@
 
 
 @interface SHCPickerTableView ()
+@property (strong, nonatomic) UIImageView *selectedImageView;
 @property (strong, nonatomic) CADisplayLink *displayLink;
 
 @end
@@ -55,6 +56,11 @@
 
 - (void)highlightCellAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.selectedImageView != nil) {
+        [self.selectedImageView removeFromSuperview];
+        self.selectedImageView = nil;
+    }
+    
     UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
     
     UIGraphicsBeginImageContextWithOptions(cell.bounds.size, NO, 0);
@@ -62,22 +68,24 @@
     UIImage *cellImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    UIImageView *draggingView = [[UIImageView alloc] initWithImage:cellImage];
-    [self addSubview:draggingView];
+    UIImageView *selectedImageView = [[UIImageView alloc] initWithImage:cellImage];
+    [self addSubview:selectedImageView];
     CGRect rect = [self rectForRowAtIndexPath:indexPath];
-    draggingView.frame = CGRectOffset(draggingView.bounds, rect.origin.x, rect.origin.y);
+    selectedImageView.frame = CGRectOffset(selectedImageView.bounds, rect.origin.x, rect.origin.y);
     
-    draggingView.layer.masksToBounds = NO;
-    draggingView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    draggingView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
-    draggingView.layer.shadowRadius = 6.0f;
-    draggingView.layer.shadowOpacity = 0.8f;
-    draggingView.layer.opacity = 0.5f;
+    selectedImageView.layer.masksToBounds = NO;
+    selectedImageView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    selectedImageView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+    selectedImageView.layer.shadowRadius = 6.0f;
+    selectedImageView.layer.shadowOpacity = 0.8f;
+    selectedImageView.layer.opacity = 0.5f;
     
     [UIView animateWithDuration:0.25f animations:^{
-        draggingView.transform = CGAffineTransformMakeScale(1.1f, 1.1f);
-        draggingView.center = CGPointMake(cell.center.x * 1.1f, cell.center.y);
+        selectedImageView.transform = CGAffineTransformMakeScale(1.1f, 1.1f);
+        selectedImageView.center = CGPointMake(cell.center.x * 1.1f, cell.center.y);
     }];
+    
+    self.selectedImageView = selectedImageView;
 }
 
 
@@ -89,20 +97,15 @@
     DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     
     DDLogVerbose(@"%@", displayLink);
-
-    
-    static CGFloat previousYPostion = 0.0f;
-    
+ 
     CGPoint contentOffset = self.contentOffset;
-    
-    CGFloat currentYPosition = contentOffset.y;
-    if (currentYPosition > previousYPostion) {
-        DDLogVerbose(@"Scrolling up.");
-        previousYPostion = currentYPosition;
-    } else if (currentYPosition < previousYPostion) {
-        DDLogVerbose(@"Scrolling down.");
-        previousYPostion = currentYPosition;
+    contentOffset.y = contentOffset.y + floorf(CGRectGetHeight(self.frame) / 2.0f);
+    NSIndexPath *newIndexPath = [self indexPathForRowAtPoint:self.contentOffset];
+    if (![self.selectedIndexPath isEqual:newIndexPath]) {
+        [self moveRowAtIndexPath:self.selectedIndexPath toIndexPath:newIndexPath];
+        [self highlightCellAtIndexPath:newIndexPath];
+        self.selectedIndexPath = newIndexPath;
     }
-}
+ }
 
 @end
