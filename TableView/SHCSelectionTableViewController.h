@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SHCSelectionTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
+@interface SHCSelectionTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *nextBarButtonItem;

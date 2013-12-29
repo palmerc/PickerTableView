@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class SHCPickerTableView;
+
+
+
 @interface SHCMoveTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet SHCPickerTableView *pickerTableView;
 
 @property (copy, nonatomic) NSArray *tableViewData;
 @property (copy, nonatomic) NSIndexPath *selectedIndexPath;

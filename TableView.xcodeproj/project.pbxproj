@@ -26,6 +26,7 @@
 		C709E9CE1868B60C0074935E /* SHCTableViewDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C709E9CD1868B60C0074935E /* SHCTableViewDataStorage.m */; };
 		C709E9D11870199F0074935E /* SHCLoggerProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C709E9D01870199F0074935E /* SHCLoggerProxy.m */; };
 		C709E9D41870209E0074935E /* SHCMoveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C709E9D31870209E0074935E /* SHCMoveTableViewController.m */; };
+		C709E9D7187038140074935E /* SHCPickerTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C709E9D6187038140074935E /* SHCPickerTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,8 @@
 		C709E9D01870199F0074935E /* SHCLoggerProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCLoggerProxy.m; sourceTree = "<group>"; };
 		C709E9D21870209E0074935E /* SHCMoveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCMoveTableViewController.h; sourceTree = "<group>"; };
 		C709E9D31870209E0074935E /* SHCMoveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCMoveTableViewController.m; sourceTree = "<group>"; };
+		C709E9D5187038140074935E /* SHCPickerTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCPickerTableView.h; sourceTree = "<group>"; };
+		C709E9D6187038140074935E /* SHCPickerTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCPickerTableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,8 @@
 				C709E9AA18687B820074935E /* SHCSelectionTableViewController.m */,
 				C709E9D21870209E0074935E /* SHCMoveTableViewController.h */,
 				C709E9D31870209E0074935E /* SHCMoveTableViewController.m */,
+				C709E9D5187038140074935E /* SHCPickerTableView.h */,
+				C709E9D6187038140074935E /* SHCPickerTableView.m */,
 				C709E9C91868834D0074935E /* SHCTableViewCell.h */,
 				C709E9CA1868834D0074935E /* SHCTableViewCell.m */,
 				C709E9CC1868B60C0074935E /* SHCTableViewDataStorage.h */,
@@ -317,6 +322,7 @@
 				C709E9A518687B820074935E /* SHCAppDelegate.m in Sources */,
 				C709E9D11870199F0074935E /* SHCLoggerProxy.m in Sources */,
 				C709E9CE1868B60C0074935E /* SHCTableViewDataStorage.m in Sources */,
+				C709E9D7187038140074935E /* SHCPickerTableView.m in Sources */,
 				C709E9CB1868834D0074935E /* SHCTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

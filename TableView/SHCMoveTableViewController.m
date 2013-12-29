@@ -10,6 +10,7 @@
 
 #import "SHCTableViewDataStorage.h"
 #import "SHCTableViewCell.h"
+#import "SHCPickerTableView.h"
 
 static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier";
 
@@ -30,6 +31,12 @@ static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier"
     self.title = NSLocalizedString(@"Move the cell", @"Move the cell");
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    self.pickerTableView.selectedIndexPath = self.selectedIndexPath;
+}
 
 
 
@@ -69,7 +76,7 @@ static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier"
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat width = self.tableView.frame.size.width - 2.0f * 8.0f;
+    CGFloat width = tableView.frame.size.width - 2.0f * 8.0f;
     
     SHCTableViewDataStorage *dataStorage = [self.tableViewData objectAtIndex:indexPath.row];
     NSString *text = dataStorage.text;
@@ -121,26 +128,6 @@ static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier"
 {
     DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     
-}
-
-
-
-#pragma mark - UIScrollViewDelegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
-    
-    static CGFloat previousYPostion = 0.0f;
-    CGPoint contentOffset = scrollView.contentOffset;
-    CGFloat yPosition = contentOffset.y;
-    if (yPosition > previousYPostion) {
-        DDLogVerbose(@"Scrolling up.");
-    } else {
-        DDLogVerbose(@"Scrolling down.");
-    }
-    
-    previousYPostion = yPosition;
 }
 
 
