@@ -119,10 +119,10 @@
         CGFloat direction = currentLeftoverPoints < 0.0f ? -1.0f : 1.0f;
         
         NSIndexPath *currentIndexPath = self.selectedIndexPath;
-        NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:currentIndexPath.row + numberOfCellsCrossed inSection:currentIndexPath.section];
+        NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:currentIndexPath.row + (numberOfCellsCrossed * direction) inSection:currentIndexPath.section];
         DDLogVerbose(@"MoveRowAtIndexPath:%@ toIndexPath:%@", currentIndexPath, newIndexPath);
         [self moveRowAtIndexPath:currentIndexPath toIndexPath:newIndexPath];
-        currentLeftoverPoints += direction * distance;
+        currentLeftoverPoints -= direction * distance;
         
         [self highlightCellAtIndexPath:newIndexPath];
         _selectedIndexPath = newIndexPath;
