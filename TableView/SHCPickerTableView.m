@@ -120,8 +120,10 @@
         
         NSIndexPath *currentIndexPath = self.selectedIndexPath;
         NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:currentIndexPath.row + (numberOfCellsCrossed * direction) inSection:currentIndexPath.section];
-        DDLogVerbose(@"MoveRowAtIndexPath:%@ toIndexPath:%@", currentIndexPath, newIndexPath);
-        [self moveRowAtIndexPath:currentIndexPath toIndexPath:newIndexPath];
+        DDLogVerbose(@"MoveRowAtIndexPathRow:%d toIndexPathRow:%d", currentIndexPath.row, newIndexPath.row);
+        if ([self.dataSource respondsToSelector:@selector(tableView:moveRowAtIndexPath:toIndexPath:)]) {
+            [self.dataSource tableView:self moveRowAtIndexPath:currentIndexPath toIndexPath:newIndexPath];
+        }
         currentLeftoverPoints -= direction * distance;
         
         [self highlightCellAtIndexPath:newIndexPath];
@@ -136,15 +138,13 @@
 
 - (void)displayDidRefresh:(CADisplayLink *)displayLink
 {
-    static CGFloat previousContentOffsetY;
+    static CGFloat previousContentOffsetY = 0.0f;
     UIEdgeInsets contentInsets = self.contentInset;
     CGFloat currentContentOffsetY = self.contentOffset.y + contentInsets.top;
     
     if (previousContentOffsetY != currentContentOffsetY) {
         CGFloat points = currentContentOffsetY - previousContentOffsetY;
         if (!self.isFirstRefresh) {
-            DDLogVerbose(@"offset: %f", points);
-            
             [self didScrollTableView:points];
         } else {
             self.firstRefresh = NO;

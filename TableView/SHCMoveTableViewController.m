@@ -92,6 +92,11 @@ static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier"
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
+}
+
 
 
 #pragma mark - IBActions
