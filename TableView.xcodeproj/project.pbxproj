@@ -15,15 +15,17 @@
 		C709E9A118687B820074935E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C709E9A018687B820074935E /* main.m */; };
 		C709E9A518687B820074935E /* SHCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C709E9A418687B820074935E /* SHCAppDelegate.m */; };
 		C709E9A818687B820074935E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C709E9A618687B820074935E /* Main.storyboard */; };
-		C709E9AB18687B820074935E /* SHCCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C709E9AA18687B820074935E /* SHCCollectionViewController.m */; };
+		C709E9AB18687B820074935E /* SHCSelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C709E9AA18687B820074935E /* SHCSelectionTableViewController.m */; };
 		C709E9AD18687B820074935E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C709E9AC18687B820074935E /* Images.xcassets */; };
 		C709E9B418687B820074935E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C709E9B318687B820074935E /* XCTest.framework */; };
 		C709E9B518687B820074935E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C709E99418687B820074935E /* Foundation.framework */; };
 		C709E9B618687B820074935E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C709E99818687B820074935E /* UIKit.framework */; };
 		C709E9BE18687B820074935E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C709E9BC18687B820074935E /* InfoPlist.strings */; };
 		C709E9C018687B820074935E /* TableViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C709E9BF18687B820074935E /* TableViewTests.m */; };
-		C709E9CB1868834D0074935E /* SHCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C709E9CA1868834D0074935E /* SHCCollectionViewCell.m */; };
+		C709E9CB1868834D0074935E /* SHCTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C709E9CA1868834D0074935E /* SHCTableViewCell.m */; };
 		C709E9CE1868B60C0074935E /* SHCTableViewDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C709E9CD1868B60C0074935E /* SHCTableViewDataStorage.m */; };
+		C709E9D11870199F0074935E /* SHCLoggerProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C709E9D01870199F0074935E /* SHCLoggerProxy.m */; };
+		C709E9D41870209E0074935E /* SHCMoveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C709E9D31870209E0074935E /* SHCMoveTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,18 +52,22 @@
 		C709E9A318687B820074935E /* SHCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHCAppDelegate.h; sourceTree = "<group>"; };
 		C709E9A418687B820074935E /* SHCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHCAppDelegate.m; sourceTree = "<group>"; };
 		C709E9A718687B820074935E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C709E9A918687B820074935E /* SHCCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHCCollectionViewController.h; sourceTree = "<group>"; };
-		C709E9AA18687B820074935E /* SHCCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHCCollectionViewController.m; sourceTree = "<group>"; };
+		C709E9A918687B820074935E /* SHCSelectionTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHCSelectionTableViewController.h; sourceTree = "<group>"; };
+		C709E9AA18687B820074935E /* SHCSelectionTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHCSelectionTableViewController.m; sourceTree = "<group>"; };
 		C709E9AC18687B820074935E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C709E9B218687B820074935E /* TableViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C709E9B318687B820074935E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		C709E9BB18687B820074935E /* TableViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TableViewTests-Info.plist"; sourceTree = "<group>"; };
 		C709E9BD18687B820074935E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C709E9BF18687B820074935E /* TableViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewTests.m; sourceTree = "<group>"; };
-		C709E9C91868834D0074935E /* SHCCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCCollectionViewCell.h; sourceTree = "<group>"; };
-		C709E9CA1868834D0074935E /* SHCCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCCollectionViewCell.m; sourceTree = "<group>"; };
+		C709E9C91868834D0074935E /* SHCTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCTableViewCell.h; sourceTree = "<group>"; };
+		C709E9CA1868834D0074935E /* SHCTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCTableViewCell.m; sourceTree = "<group>"; };
 		C709E9CC1868B60C0074935E /* SHCTableViewDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCTableViewDataStorage.h; sourceTree = "<group>"; };
 		C709E9CD1868B60C0074935E /* SHCTableViewDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCTableViewDataStorage.m; sourceTree = "<group>"; };
+		C709E9CF1870199F0074935E /* SHCLoggerProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCLoggerProxy.h; sourceTree = "<group>"; };
+		C709E9D01870199F0074935E /* SHCLoggerProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCLoggerProxy.m; sourceTree = "<group>"; };
+		C709E9D21870209E0074935E /* SHCMoveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCMoveTableViewController.h; sourceTree = "<group>"; };
+		C709E9D31870209E0074935E /* SHCMoveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCMoveTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,12 +133,16 @@
 				C709E9A318687B820074935E /* SHCAppDelegate.h */,
 				C709E9A418687B820074935E /* SHCAppDelegate.m */,
 				C709E9A618687B820074935E /* Main.storyboard */,
-				C709E9A918687B820074935E /* SHCCollectionViewController.h */,
-				C709E9AA18687B820074935E /* SHCCollectionViewController.m */,
-				C709E9C91868834D0074935E /* SHCCollectionViewCell.h */,
-				C709E9CA1868834D0074935E /* SHCCollectionViewCell.m */,
+				C709E9A918687B820074935E /* SHCSelectionTableViewController.h */,
+				C709E9AA18687B820074935E /* SHCSelectionTableViewController.m */,
+				C709E9D21870209E0074935E /* SHCMoveTableViewController.h */,
+				C709E9D31870209E0074935E /* SHCMoveTableViewController.m */,
+				C709E9C91868834D0074935E /* SHCTableViewCell.h */,
+				C709E9CA1868834D0074935E /* SHCTableViewCell.m */,
 				C709E9CC1868B60C0074935E /* SHCTableViewDataStorage.h */,
 				C709E9CD1868B60C0074935E /* SHCTableViewDataStorage.m */,
+				C709E9CF1870199F0074935E /* SHCLoggerProxy.h */,
+				C709E9D01870199F0074935E /* SHCLoggerProxy.m */,
 				C709E9AC18687B820074935E /* Images.xcassets */,
 				C709E99B18687B820074935E /* Supporting Files */,
 			);
@@ -301,11 +311,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C709E9D41870209E0074935E /* SHCMoveTableViewController.m in Sources */,
 				C709E9A118687B820074935E /* main.m in Sources */,
-				C709E9AB18687B820074935E /* SHCCollectionViewController.m in Sources */,
+				C709E9AB18687B820074935E /* SHCSelectionTableViewController.m in Sources */,
 				C709E9A518687B820074935E /* SHCAppDelegate.m in Sources */,
+				C709E9D11870199F0074935E /* SHCLoggerProxy.m in Sources */,
 				C709E9CE1868B60C0074935E /* SHCTableViewDataStorage.m in Sources */,
-				C709E9CB1868834D0074935E /* SHCCollectionViewCell.m in Sources */,
+				C709E9CB1868834D0074935E /* SHCTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

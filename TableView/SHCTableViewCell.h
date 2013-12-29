@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SHCCollectionViewCell : UICollectionViewCell
+@interface SHCTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
 
