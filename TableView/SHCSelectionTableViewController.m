@@ -8,10 +8,11 @@
 
 #import "SHCSelectionTableViewController.h"
 
-#import "SHCLoggerProxy.h"
 #import "SHCTableViewCell.h"
 #import "SHCTableViewDataStorage.h"
+#import "SHCMoveTableViewController.h"
 
+static NSString *kMoveTableViewControllerSegue = @"MoveTableViewControllerSegue";
 static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier";
 
 
@@ -30,6 +31,13 @@ static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier"
 {
     [super viewDidLoad];
     
+    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
+    
+    self.title = NSLocalizedString(@"Select a cell", @"Select a cell");
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", @"Back") style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.nextBarButtonItem.title = NSLocalizedString(@"Next", @"Next");
+    self.nextBarButtonItem.enabled = NO;
+    
     NSMutableArray *mutableTableViewData = [[NSMutableArray alloc] init];
     for (int i = 0; i < 100; i++) {
         SHCTableViewDataStorage *dataStorage = [SHCTableViewDataStorage tableViewDataStorage];
@@ -39,6 +47,16 @@ static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier"
     }
     
     self.tableViewData = [mutableTableViewData copy];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:kMoveTableViewControllerSegue]) {
+        NSIndexPath *indexPath = sender;
+        SHCMoveTableViewController *moveTableViewController = segue.destinationViewController;
+        moveTableViewController.selectedIndexPath = indexPath;
+        moveTableViewController.tableViewData = self.tableViewData;
+    }
 }
 
 
@@ -60,6 +78,12 @@ static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier"
     SHCTableViewDataStorage *dataStorage = [self.tableViewData objectAtIndex:indexPath.row];
 
     SHCTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:kTableViewCellReuseIdentifier];
+    
+    if ([indexPath isEqual:self.selectedIndexPath]) {
+        tableViewCell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        tableViewCell.accessoryType = UITableViewCellAccessoryNone;
+    }
     
     if (indexPath.row % 2 == 0) {
         tableViewCell.backgroundColor = [UIColor whiteColor];
@@ -90,12 +114,46 @@ static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier"
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
+
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (self.isEditing) {
-        NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:(indexPath.row + 1) inSection:indexPath.section];
-        [tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
+    BOOL enableNextButton;
+    if (self.selectedIndexPath == nil) {
+        enableNextButton = YES;
+        
+        DDLogVerbose(@"Reloading: %@", indexPath);
+        self.selectedIndexPath = indexPath;
+        
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    } else if ([self.selectedIndexPath isEqual:indexPath]) {
+        enableNextButton = NO;
+
+        DDLogVerbose(@"Reloading: %@", indexPath);
+        self.selectedIndexPath = nil;
+        
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    } else {
+        enableNextButton = YES;
+        
+        NSIndexPath *oldIndexPath = self.selectedIndexPath;
+        self.selectedIndexPath = indexPath;
+
+        DDLogVerbose(@"Reloading: %@ %@", oldIndexPath, self.selectedIndexPath);
+        [tableView reloadRowsAtIndexPaths:@[oldIndexPath, self.selectedIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+        
     }
+    
+    self.nextBarButtonItem.enabled = enableNextButton;
+}
+
+
+
+#pragma mark - IBActions
+
+- (IBAction)didPressNextBarButtonItem:(id)sender
+{
+    [self performSegueWithIdentifier:kMoveTableViewControllerSegue sender:self.selectedIndexPath];
 }
 
 @end

@@ -11,5 +11,8 @@
 @interface SHCSelectionTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *nextBarButtonItem;
+
+- (IBAction)didPressNextBarButtonItem:(id)sender;
 
 @end

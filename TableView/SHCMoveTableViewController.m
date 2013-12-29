@@ -9,6 +9,10 @@
 #import "SHCMoveTableViewController.h"
 
 #import "SHCTableViewDataStorage.h"
+#import "SHCTableViewCell.h"
+
+static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier";
+
 
 
 @interface SHCMoveTableViewController ()
@@ -18,6 +22,16 @@
 
 
 @implementation SHCMoveTableViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.title = NSLocalizedString(@"Move the cell", @"Move the cell");
+}
+
+
+
 
 #pragma mark - UITableViewDataSource
 

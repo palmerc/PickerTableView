@@ -22,7 +22,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableViewCellReuseIdentifier" id="vrn-tP-5Yh" customClass="SHCTableViewCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vrn-tP-5Yh" id="1mD-kx-0Oh">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -62,14 +62,41 @@
                             <constraint firstItem="jnp-XF-H3z" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="qI8-pr-W8N"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="8eC-rU-KHq"/>
+                    <navigationItem key="navigationItem" id="8eC-rU-KHq">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="hN5-YB-hCc">
+                            <connections>
+                                <action selector="didPressNextBarButtonItem:" destination="vXZ-lx-hvc" id="0fa-1V-fbm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="nextBarButtonItem" destination="hN5-YB-hCc" id="MKt-6b-fIX"/>
                         <outlet property="tableView" destination="jnp-XF-H3z" id="3Uk-oY-Vrc"/>
+                        <segue destination="zMX-xR-NI7" kind="push" identifier="MoveTableViewControllerSegue" id="rCm-1q-QGe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-319" y="128"/>
+        </scene>
+        <!--Move Table View Controller-->
+        <scene sceneID="Lb8-ql-CMa">
+            <objects>
+                <viewController id="zMX-xR-NI7" customClass="SHCMoveTableViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wLu-IS-qW8"/>
+                        <viewControllerLayoutGuide type="bottom" id="jf8-aE-pXy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="INJ-NJ-gaY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="K4s-z4-Ycl"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BPP-rG-YHR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="163" y="128"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eSm-mD-zbK">
