@@ -80,12 +80,9 @@ static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier"
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (self.isEditing) {
-        NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:(indexPath.row + 1) inSection:indexPath.section];
-        [tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
-    }
+    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
+
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
@@ -95,14 +92,14 @@ static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier"
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     
     return YES;
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     
     return UITableViewCellEditingStyleNone;
 }
@@ -122,7 +119,7 @@ static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier"
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     
 }
 
@@ -132,18 +129,27 @@ static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier"
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     
     static CGFloat previousYPostion = 0.0f;
     CGPoint contentOffset = scrollView.contentOffset;
     CGFloat yPosition = contentOffset.y;
     if (yPosition > previousYPostion) {
-        NSLog(@"Scrolling up.");
+        DDLogVerbose(@"Scrolling up.");
     } else {
-        NSLog(@"Scrolling down.");
+        DDLogVerbose(@"Scrolling down.");
     }
     
     previousYPostion = yPosition;
+}
+
+
+
+#pragma mark - IBActions
+
+- (IBAction)didPressDoneBarButtonItem:(id)sender
+{
+    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
 }
 
 @end

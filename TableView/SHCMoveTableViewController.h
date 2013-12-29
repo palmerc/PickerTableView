@@ -12,7 +12,9 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) NSArray *tableViewData;
-@property (strong, nonatomic) NSIndexPath *selectedIndexPath;
+@property (copy, nonatomic) NSArray *tableViewData;
+@property (copy, nonatomic) NSIndexPath *selectedIndexPath;
+
+- (IBAction)didPressDoneBarButtonItem:(id)sender;
 
 @end
