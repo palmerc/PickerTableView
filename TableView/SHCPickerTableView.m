@@ -21,6 +21,11 @@
 {
     _selectedIndexPath = selectedIndexPath;
     
+    [self highlightCellAtIndexPath:self.selectedIndexPath];
+}
+
+- (void)highlightCellAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell *cell = [self cellForRowAtIndexPath:self.selectedIndexPath];
     
     UIGraphicsBeginImageContextWithOptions(cell.bounds.size, NO, 0);
@@ -33,21 +38,18 @@
     CGRect rect = [self rectForRowAtIndexPath:self.selectedIndexPath];
     draggingView.frame = CGRectOffset(draggingView.bounds, rect.origin.x, rect.origin.y);
     
-    // add drop shadow to image and lower opacity
     draggingView.layer.masksToBounds = NO;
     draggingView.layer.shadowColor = [[UIColor blackColor] CGColor];
     draggingView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
-    draggingView.layer.shadowRadius = 4.0f;
+    draggingView.layer.shadowRadius = 6.0f;
     draggingView.layer.shadowOpacity = 0.8f;
     draggingView.layer.opacity = 1.0f;
     
-    // zoom image towards user
-    [UIView animateWithDuration:0.20f animations:^{
+    [UIView animateWithDuration:0.25f animations:^{
         draggingView.transform = CGAffineTransformMakeScale(1.1f, 1.1f);
         draggingView.center = CGPointMake(cell.center.x * 1.1f, cell.center.y);
     }];
 }
-
 
 
 
