@@ -11,22 +11,51 @@
 
 
 @interface SHCPickerTableView ()
+@property (strong, nonatomic) CADisplayLink *displayLink;
+
 @end
 
 
 
 @implementation SHCPickerTableView
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self != nil) {
+        [self initialize];
+    }
+    
+    return self;
+}
+
+- (void)initialize
+{
+    CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(displayDidRefresh:)];
+    displayLink.frameInterval = 60.0f;
+    [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+    self.displayLink = displayLink;
+}
+
+
+
 - (void)setSelectedIndexPath:(NSIndexPath *)selectedIndexPath
 {
-    _selectedIndexPath = selectedIndexPath;
+    [self scrollToCellAtIndexPath:selectedIndexPath];
+    [self highlightCellAtIndexPath:selectedIndexPath];
     
-    [self highlightCellAtIndexPath:self.selectedIndexPath];
+    _selectedIndexPath = selectedIndexPath;
+}
+
+- (void)scrollToCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+    
 }
 
 - (void)highlightCellAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [self cellForRowAtIndexPath:self.selectedIndexPath];
+    UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
     
     UIGraphicsBeginImageContextWithOptions(cell.bounds.size, NO, 0);
     [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -35,7 +64,7 @@
     
     UIImageView *draggingView = [[UIImageView alloc] initWithImage:cellImage];
     [self addSubview:draggingView];
-    CGRect rect = [self rectForRowAtIndexPath:self.selectedIndexPath];
+    CGRect rect = [self rectForRowAtIndexPath:indexPath];
     draggingView.frame = CGRectOffset(draggingView.bounds, rect.origin.x, rect.origin.y);
     
     draggingView.layer.masksToBounds = NO;
@@ -43,7 +72,7 @@
     draggingView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
     draggingView.layer.shadowRadius = 6.0f;
     draggingView.layer.shadowOpacity = 0.8f;
-    draggingView.layer.opacity = 1.0f;
+    draggingView.layer.opacity = 0.5f;
     
     [UIView animateWithDuration:0.25f animations:^{
         draggingView.transform = CGAffineTransformMakeScale(1.1f, 1.1f);
@@ -55,20 +84,25 @@
 
 #pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)displayDidRefresh:(CADisplayLink *)displayLink
 {
     DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
     
-    static CGFloat previousYPostion = 0.0f;
-    CGPoint contentOffset = scrollView.contentOffset;
-    CGFloat yPosition = contentOffset.y;
-    if (yPosition > previousYPostion) {
-        DDLogVerbose(@"Scrolling up.");
-    } else {
-        DDLogVerbose(@"Scrolling down.");
-    }
+    DDLogVerbose(@"%@", displayLink);
+
     
-    previousYPostion = yPosition;
+    static CGFloat previousYPostion = 0.0f;
+    
+    CGPoint contentOffset = self.contentOffset;
+    
+    CGFloat currentYPosition = contentOffset.y;
+    if (currentYPosition > previousYPostion) {
+        DDLogVerbose(@"Scrolling up.");
+        previousYPostion = currentYPosition;
+    } else if (currentYPosition < previousYPostion) {
+        DDLogVerbose(@"Scrolling down.");
+        previousYPostion = currentYPosition;
+    }
 }
 
 @end

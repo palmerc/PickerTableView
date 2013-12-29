@@ -92,44 +92,6 @@ static NSString *kTableViewCellReuseIdentifier = @"TableViewCellReuseIdentifier"
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
-- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return NO;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
-    
-    return YES;
-}
-
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
-    
-    return UITableViewCellEditingStyleNone;
-}
-
-/**
- * This locks the selected cell in place.
- */
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    BOOL canMoveRowAtIndexPath = NO;
-    if (![indexPath isEqual:self.selectedIndexPath]) {
-        canMoveRowAtIndexPath = YES;
-    }
-    
-    return canMoveRowAtIndexPath;
-}
-
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
-{
-    DDLogVerbose(@"%s", __PRETTY_FUNCTION__);
-    
-}
-
 
 
 #pragma mark - IBActions
